@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Feedback Form - Barddhaman Apollo Hospital</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 180px;
+            height: auto;
+        }
+        h1 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #495057;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .form-group .radio-group, .form-group .rating-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .form-group .radio-group label, .form-group .rating-group label {
+            margin: 0;
+        }
+        .form-group .radio-group input, .form-group .rating-group input {
+            margin-right: 8px;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            border: none;
+            color: #ffffff;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .error-message {
+            color: #dc3545;
+            margin-top: 5px;
+        }
+        .language-switcher {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .language-switcher select {
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            background: #ffffff;
+            color: #495057;
+        }
+        .hidden {
+            display: none;
+        }
+        .emoji-group {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .star-rating {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-size: 36px;
+        }
+        .star-rating input {
+            display: none; /* Hide radio buttons */
+        }
+        .star-rating label {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .star-rating label:hover {
+            transform: scale(1.2);
+        }
+        .star-rating input:checked ~ label {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://assets.onecompiler.app/42rjhjuwn/42rjh5tu9/Add_a_heading__3_-removebg-preview.png" alt="Barddhaman Apollo Hospital Logo">
+        </div>
+        <div class="language-switcher">
+            <label for="language">Language:</label>
+            <select id="language" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="hi">हिन्दी</option>
+                <option value="bn">বাংলা</option>
+            </select>
+        </div>
+        <h1 data-text="formTitle">Patient Feedback Form</h1>
+        <form id="feedbackForm" action="https://script.google.com/macros/s/AKfycbzEz6erIVSgGs375eWsdI5Psd32qghixKJ5F20lJemOl6814WM0_leDMhj3EmuZJoGmVA/exec" method="POST">
+            <div class="form-group">
+                <label for="name" data-text="nameLabel">Name:</label>
+                <input type="text" id="name" name="name" aria-describedby="nameError" required>
+                <div class="error-message hidden" id="nameError">This field is required.</div>
+            </div>
+            <div class="form-group">
+                <label for="email" data-text="emailLabel">Email:</label>
+                <input type="email" id="email" name="email" aria-describedby="emailError" required>
+                <div class="error-message hidden" id="emailError">This field is required.</div>
+            </div>
+            <div class="form-group">
+                <label for="phone" data-text="phoneLabel">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" aria-describedby="phoneError" required>
+                <div class="error-message hidden" id="phoneError">This field is required.</div>
+            </div>
+            <div class="form-group">
+                <label for="visit_date" data-text="visitDateLabel">Date of Visit:</label>
+                <input type="date" id="visit_date" name="visit_date" aria-describedby="visitDateError" required>
+                <div class="error-message hidden" id="visitDateError">This field is required.</div>
+            </div>
+            <div class="form-group">
+                <label for="rating" data-text="overallExperienceLabel">Overall Experience:</label>
+                <div class="rating-group">
+                    <label><input type="radio" name="rating" value="😍" required> 😍 Excellent</label>
+                    <label><input type="radio" name="rating" value="😃" required> 😃 Very Good</label>
+                    <label><input type="radio" name="rating" value="😊" required> 😊 Good</label>
+                    <label><input type="radio" name="rating" value="😐" required> 😐 Average</label>
+                    <label><input type="radio" name="rating" value="🙁" required> 🙁 Poor</label>
+                </div>
+                <div class="error-message hidden" id="ratingError">Please rate your overall experience.</div>
+            </div>
+            <div class="form-group">
+                <label for="staff_rating" data-text="staffRatingLabel">How would you rate the hospital staff?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="staff_rating" value="😍" required> 😍 Excellent</label>
+                    <label><input type="radio" name="staff_rating" value="😃" required> 😃 Very Good</label>
+                    <label><input type="radio" name="staff_rating" value="😊" required> 😊 Good</label>
+                    <label><input type="radio" name="staff_rating" value="😐" required> 😐 Average</label>
+                    <label><input type="radio" name="staff_rating" value="🙁" required> 🙁 Poor</label>
+                </div>
+                <div class="error-message hidden" id="staffRatingError">Please rate the hospital staff.</div>
+            </div>
+            <div class="form-group">
+                <label for="cleanliness_rating" data-text="cleanlinessRatingLabel">How would you rate the cleanliness of the hospital?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="cleanliness_rating" value="😍" required> 😍 Excellent</label>
+                    <label><input type="radio" name="cleanliness_rating" value="😃" required> 😃 Very Good</label>
+                    <label><input type="radio" name="cleanliness_rating" value="😊" required> 😊 Good</label>
+                    <label><input type="radio" name="cleanliness_rating" value="😐" required> 😐 Average</label>
+                    <label><input type="radio" name="cleanliness_rating" value="🙁" required> 🙁 Poor</label>
+                </div>
+                <div class="error-message hidden" id="cleanlinessRatingError">Please rate the cleanliness of the hospital.</div>
+            </div>
+            <div class="form-group">
+                <label for="service_quality" data-text="serviceQualityLabel">Rate the quality of services provided:</label>
+                <div class="rating-group">
+                    <label><input type="radio" name="service_quality" value="😍" required> 😍 Excellent</label>
+                    <label><input type="radio" name="service_quality" value="😃" required> 😃 Very Good</label>
+                    <label><input type="radio" name="service_quality" value="😊" required> 😊 Good</label>
+                    <label><input type="radio" name="service_quality" value="😐" required> 😐 Average</label>
+                    <label><input type="radio" name="service_quality" value="🙁" required> 🙁 Poor</label>
+                </div>
+                <div class="error-message hidden" id="serviceError">Please provide feedback on the quality of services.</div>
+            </div>
+            <div class="form-group">
+                <label for="comments" data-text="commentsLabel">Additional Comments:</label>
+                <textarea id="comments" name="comments" rows="4"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Submit Feedback</button>
+        </form>
+    </div>
+    <script>
+        function changeLanguage() {
+            const language = document.getElementById('language').value;
+            const translations = {
+                en: {
+                    formTitle: "Patient Feedback Form",
+                    nameLabel: "Name:",
+                    emailLabel: "Email:",
+                    phoneLabel: "Phone Number:",
+                    visitDateLabel: "Date of Visit:",
+                    overallExperienceLabel: "Overall Experience:",
+                    staffRatingLabel: "How would you rate the hospital staff?",
+                    cleanlinessRatingLabel: "How would you rate the cleanliness of the hospital?",
+                    serviceQualityLabel: "Rate the quality of services provided:",
+                    commentsLabel: "Additional Comments:"
+                },
+                hi: {
+                    formTitle: "रोगी फीडबैक फॉर्म",
+                    nameLabel: "नाम:",
+                    emailLabel: "ईमेल:",
+                    phoneLabel: "फोन नंबर:",
+                    visitDateLabel: "दौरे की तारीख:",
+                    overallExperienceLabel: "कुल अनुभव:",
+                    staffRatingLabel: "आप अस्पताल के स्टाफ को कैसे रेट करेंगे?",
+                    cleanlinessRatingLabel: "आप अस्पताल की सफाई को कैसे रेट करेंगे?",
+                    serviceQualityLabel: "प्रदान की गई सेवाओं की गुणवत्ता को रेट करें:",
+                    commentsLabel: "अतिरिक्त टिप्पणियाँ:"
+                },
+                bn: {
+                    formTitle: "রোগী প্রতিক্রিয়া ফর্ম",
+                    nameLabel: "নাম:",
+                    emailLabel: "ইমেইল:",
+                    phoneLabel: "ফোন নম্বর:",
+                    visitDateLabel: "ভিজিটের তারিখ:",
+                    overallExperienceLabel: "মোট অভিজ্ঞতা:",
+                    staffRatingLabel: "আপনি হাসপাতালের কর্মচারীদের কিভাবে রেট করবেন?",
+                    cleanlinessRatingLabel: "আপনি হাসপাতালের পরিচ্ছন্নতাকে কিভাবে রেট করবেন?",
+                    serviceQualityLabel: "প্রদত্ত পরিষেবাগুলির গুণমান মূল্যায়ন করুন:",
+                    commentsLabel: "অতিরিক্ত মন্তব্য:"
+                }
+            };
+
+            const elementsToTranslate = document.querySelectorAll('[data-text]');
+            elementsToTranslate.forEach(element => {
+                const key = element.getAttribute('data-text');
+                element.innerText = translations[language][key];
+            });
+        }
+
+        document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+            let isValid = true;
+
+            const requiredFields = [
+                { id: 'name', errorId: 'nameError' },
+                { id: 'email', errorId: 'emailError' },
+                { id: 'phone', errorId: 'phoneError' },
+                { id: 'visit_date', errorId: 'visitDateError' },
+                { id: 'rating', errorId: 'ratingError' },
+                { id: 'service_quality', errorId: 'serviceError' }
+            ];
+
+            requiredFields.forEach(field => {
+                const input = document.getElementById(field.id);
+                const errorMessage = document.getElementById(field.errorId);
+                if (!input.value || (field.id === 'rating' && !input.querySelector('input:checked')) || (field.id === 'service_quality' && !input.querySelector('input:checked'))) {
+                    errorMessage.classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    errorMessage.classList.add('hidden');
+                }
+            });
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
